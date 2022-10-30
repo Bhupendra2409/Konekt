@@ -1,0 +1,23 @@
+.sidebarFriend{
+    margin: 0.6rem 0rem;
+    display: flex;
+    padding: 0.5rem 1rem;
+    padding-right: 0    rem;
+    align-items: center;
+}
+.sidebarFriend:hover{
+    cursor: pointer;
+}
+.sidebarFriendImg{
+    height: 2.5rem !important;
+    margin-right: 1rem;
+    width: 2.5rem !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.sidebarFriendName{
+    color: rgb(73, 73, 73);
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+}

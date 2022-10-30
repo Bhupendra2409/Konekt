@@ -1,0 +1,33 @@
+.rightbarFrndListItem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.7rem;
+    transition: all 0.3s ease;
+}
+.rightbarFrndListItem:hover{
+    background-color: rgb(220, 220, 255);
+    
+}
+.rightbarFrndImgCnt{
+    display: flex;
+    width: fit-content;
+    margin-right: 1rem;
+ }
+.rightbarFrndImg{
+width: 3rem;
+height: 3rem;
+object-fit: cover;
+border-radius: 50%;
+}
+.rightbarFrndImgBadge{
+    padding: 0.4rem;
+    top: 0.4rem;
+    right: -0.4rem;
+}
+.rightbarFrnd{
+    font-size: 0.9rem;
+    font-weight: 600;
+}
