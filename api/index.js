@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const {ServerApiVersion} = require('mongodb');
+
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
@@ -30,7 +32,11 @@ app.use('/api/user',userRoute)
 app.use('/api/auth',authRoute)
 app.use('/api/posts',postRoute)
 
-mongoose.connect(process.env.MONGO_URL2,{useNewUrlParser: true},()=>{
+
+
+mongoose.connect(process.env.MONGO_URL,{useUnifiedTopology: true, serverApi: ServerApiVersion.v1, dbName: 'konekt',useNewUrlParser: true},(err)=>{
+    if(err) console.log(err);
+    else
     console.log('Connected to mongodb');
 });
 

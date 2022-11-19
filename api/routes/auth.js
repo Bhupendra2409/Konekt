@@ -2,6 +2,8 @@ const router = require("express").Router();
 const User = require("../models/User");
 const ErrorResponse = require("../utils/errorResponse");
 
+
+
 //register
 router.post("/register", async (req, res, next) => {
   const { username, email, password } = req.body;

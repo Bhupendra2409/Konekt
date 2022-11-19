@@ -95,4 +95,18 @@ router.put("/:id/unfollow", async(req,res)=>{
     }
 })
 
+router.put("/:id/editprofilepicture", async(req,res)=>{
+    if(req.body.userId!==req.params.id){
+        try{
+            
+        }
+        catch(err){
+            next(err);
+        }
+    }
+    else{
+        return next(new ErrorResponse("You cannot unfollow yourself",403))
+    }
+})
+
 module.exports = router;
