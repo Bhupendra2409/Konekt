@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const helmet = require('helmet');
+const cors = require(cors);
 const morgan = require('morgan');
 // const path = require('path')
 const {ServerApiVersion} = require('mongodb');
@@ -17,7 +18,7 @@ dotenv.config();
 
 
 //middleware
-
+app.use(cors())
 app.use(express.json());
 app.use(helmet());
 app.use(morgan('common'));
@@ -32,6 +33,7 @@ app.use(morgan('common'));
 //         'block-all-mixed-content': false
 //     }
 // }));
+
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin","*");
     res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
