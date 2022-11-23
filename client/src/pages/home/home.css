@@ -1,0 +1,7 @@
+.homeCnt{
+    display: grid;
+    max-width: 80rem;
+    margin:0 auto;
+    grid-template-columns: 2.5fr 6fr 3fr;
+
+}
