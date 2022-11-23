@@ -18,11 +18,11 @@ dotenv.config();
 
 
 //middleware
-app.use(cors())
 app.use(express.json());
 app.use(helmet());
 app.use(morgan('common'));
 
+app.use(cors())
 // app.use(expressCspHeader({
 //     directives: {
 //         'default-src': [SELF],
