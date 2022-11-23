@@ -3,9 +3,11 @@ const ErrorResponse = require('../utils/errorResponse');
 const Posts = require('../models/Post')
 const User = require('../models/User')
 
-//create a post
+
 router.post('/',async (req,res,next)=>{
+
     const newPost = new Posts(req.body);
+
     try{
         const savedPost = await newPost.save();
         res.status(200).json(savedPost);

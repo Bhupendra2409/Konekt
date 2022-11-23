@@ -1,0 +1,14 @@
+a{
+    text-decoration: none;
+}
+.noavatar{
+    align-items: center;
+    border-radius: 3rem 3rem 3rem/3rem 3rem;
+    text-align: center;
+    justify-content: center;
+    height: 3rem;
+    width: 3rem;
+    background-color: rgb(101, 101, 255);;
+    color: white;
+    font-weight: bold;
+}

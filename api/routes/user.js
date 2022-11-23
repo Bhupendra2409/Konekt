@@ -5,11 +5,13 @@ const ErrorResponse = require('../utils/errorResponse');
 router.put('/:id',async(req,res,next)=>{
     if(req.body.userId===req.params.id || req.body.isAdmin){
         try{
-            const user = await User.findByIdAndUpdate(req.params.id,{
+            var user = await User.findByIdAndUpdate(req.params.id,{
                 $set:req.body,
             });
-            
-            res.status(200).json("Account has been updated")
+            user = await User.findById(req.params.id);
+            const {password,updatedAt,...other} = user._doc;
+
+            res.status(200).json(other);
         }catch(err){
             res.status(500).json(err);
         }

@@ -4,11 +4,11 @@ import {Users} from '../../dummyData'
 import Online from "../online/Online";
 
 
-export default function Rightbar({user}) {
+export default function Rightbar({user,show}) {
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-
+  
   const HomeRightbar =()=>{
     return(
       <>
@@ -58,6 +58,8 @@ export default function Rightbar({user}) {
       </>
     )
   }
+ 
+  
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">

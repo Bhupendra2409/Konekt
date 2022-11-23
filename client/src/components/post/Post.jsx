@@ -2,10 +2,11 @@ import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {format} from 'timeago.js'
+import { format } from 'timeago.js'
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import NoAvatar from "../NoAvatar";
 
 
 export default function Post({ post }) {
@@ -13,13 +14,13 @@ export default function Post({ post }) {
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
 
-  const {user:currentUser} =useContext(AuthContext)
+  const { user: currentUser } = useContext(AuthContext)
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  useEffect(()=>{
+  useEffect(() => {
     setIsLiked(post.likes.includes(currentUser.user._id))
-  },[currentUser.user._id,post.likes])
+  }, [currentUser.user._id, post.likes])
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -30,32 +31,34 @@ export default function Post({ post }) {
   }, [post.userId]);
 
   const likeHandler = () => {
-    try{
-      axios.put(`/posts/${post._id}/like`,{userId:currentUser.user._id})
+    try {
+      axios.put(`/posts/${post._id}/like`, { userId: currentUser.user._id })
     }
-    catch(err){
+    catch (err) {
       console.log(err);
     }
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
-
+  
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-              <Link to={`/profile/${user.username}`}>
-              <img
-              className="postProfileImg"
-              src={PF + user.profilePicture || PF + "person/noAvatar.jpeg"}
-              alt=""
-              />
-              </Link>
+            <Link to={`/profile/${user.username}`}>
+              {user.profilePicture!=="" ? <img
+                className="postProfileImg"
+                // src={PF + user.profilePicture || PF + "person/noAvatar.jpeg"}
+                src={user.profilePicture}
+                alt=""
+              />: <NoAvatar letter={user.username[0].toUpperCase()}/>}
+
+            </Link>
             <span className="postUsername">
-                <Link to={`/profile/${user.username}`} style={{textDecoration:'none'}}>
+              <Link to={`/profile/${user.username}`} style={{ textDecoration: 'none' }}>
                 {user.username}
-                </Link>
+              </Link>
               <span className="postDate">{format(post.createdAt)}</span>
             </span>
           </div>
@@ -66,7 +69,9 @@ export default function Post({ post }) {
 
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={PF + post.photo} alt="" />
+          {/* <img className="postImg" src={PF + post.photo} alt="" /> */}
+          {post.photo && <img className="postImg" src={post.photo} alt="" />}
+
         </div>
 
         <div className="postBottom">

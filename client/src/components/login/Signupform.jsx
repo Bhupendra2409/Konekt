@@ -1,11 +1,14 @@
-import React, { useRef,useContext} from "react";
+import React, { useRef, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { loginCall } from "../../apiCalls";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-export default function Signupform({setStatus}) {
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import {auth} from '../../firebaseconfig'
+
+export default function Signupform({ setStatus }) {
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -17,24 +20,40 @@ export default function Signupform({setStatus}) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    if(password.current.value!==confirmPassword.current.value){
-        confirmPassword.current.setCustomValidity("Passwords don't match!")
+    if (password.current.value !== confirmPassword.current.value) {
+      confirmPassword.current.setCustomValidity("Passwords don't match!")
     }
-    else{
-        const user={
-            username:username.current.value,
-            email:email.current.value,
-            password:password.current.value,
-        }
+    else {
+      const user = {
+        username: username.current.value,
+        email: email.current.value,
+        password: password.current.value,
+      }
 
-        try{
-            await axios.post("/auth/register",user);
-            setStatus("Login");
-        }
-        catch(err){
-            console.log(err);
-        }
-        
+      
+
+      try {
+
+        createUserWithEmailAndPassword(auth, user.email, user.password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user)
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+
+        await axios.post("/auth/register", user);
+        setStatus("Login");
+      }
+      catch (err) {
+        console.log(err);
+      }
+
     }
   };
 
@@ -76,7 +95,7 @@ export default function Signupform({setStatus}) {
         className="login-page-btn login-btn btn-success btn"
         disabled={isFetching}
       >
-        {isFetching? <CircularProgress size='1rem'/>:"Signup"}
+        {isFetching ? <CircularProgress size='1rem' /> : "Signup"}
       </button>
     </form>
   );

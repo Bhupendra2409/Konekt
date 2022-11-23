@@ -13,6 +13,7 @@
 .profileCoverImg{
     height: 25rem;
     object-fit: cover;
+    background-color: rgb(175, 175, 175);
 }
 .profileUserImg{
     width: 12rem;
@@ -46,4 +47,7 @@
 .profileRightBottom{
     display: grid;
     grid-template-columns: 6fr 3fr;
+}
+.editProfile{
+   font-size: 12px;
 }

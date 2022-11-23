@@ -5,6 +5,9 @@ import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext"
 import {CircularProgress} from "@material-ui/core"
 
+import {auth} from '../../firebaseconfig'
+import {signInWithEmailAndPassword } from "firebase/auth";
+
 export default function Loginform() {
  
 
@@ -15,7 +18,19 @@ export default function Loginform() {
 
   const handleClick = (e)=>{
     e.preventDefault();
+    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+
     loginCall({email:email.current.value,password:password.current.value},dispatch)
+    // const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+
+    
   }
   return (
     <form className="login-form-cnt pb-3" onSubmit={handleClick}>

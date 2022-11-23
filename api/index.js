@@ -33,14 +33,11 @@ app.use('/api/auth',authRoute)
 app.use('/api/posts',postRoute)
 
 
+mongoose.connect(process.env.MONGO_URL,{useUnifiedTopology: true, serverApi: ServerApiVersion.v1, dbName: 'konekt',useNewUrlParser: true})
+.then(()=>{
+    app.listen(8000,()=>{
+        console.log("server running");
+    })
+}).catch((err)=>console.log(err) );
 
-mongoose.connect(process.env.MONGO_URL,{useUnifiedTopology: true, serverApi: ServerApiVersion.v1, dbName: 'konekt',useNewUrlParser: true},(err)=>{
-    if(err) console.log(err);
-    else
-    console.log('Connected to mongodb');
-});
 
-
-app.listen(8000,()=>{
-    console.log("server running");
-})

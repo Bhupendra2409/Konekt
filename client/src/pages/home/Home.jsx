@@ -10,8 +10,8 @@ export default function Home() {
        <Topbar/>
        <div className="homeCnt">
        <Sidebar/>
-       <Feed/>
-        <Rightbar/>
+       <Feed show={true}/>
+        <Rightbar show={true}/>
        </div>
         </>
        
